@@ -166,17 +166,61 @@ img { display: block; max-width: 100%; }
 }
 
 /* =============================================
-   SCROLL REVEAL
+   SCROLL REVEAL & STAGGERING
    ============================================= */
-.reveal {
+.reveal, .reveal-up {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transform: translateY(32px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  will-change: transform, opacity;
 }
-.reveal.active {
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  will-change: transform, opacity;
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  will-change: transform, opacity;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.96) translateY(15px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  will-change: transform, opacity;
+}
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(10px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), filter 0.8s var(--ease);
+  will-change: transform, opacity, filter;
+}
+
+.reveal.active,
+.reveal-up.active,
+.reveal-left.active,
+.reveal-right.active,
+.reveal-scale.active,
+.reveal-blur.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateX(0) scale(1);
+  filter: blur(0);
 }
+
+/* Staggered Delay Utilities */
+.delay-100 { transition-delay: 100ms !important; }
+.delay-200 { transition-delay: 200ms !important; }
+.delay-300 { transition-delay: 300ms !important; }
+.delay-400 { transition-delay: 400ms !important; }
+.delay-500 { transition-delay: 500ms !important; }
 
 /* =============================================
    UTILITY
@@ -988,3 +1032,44 @@ footer a:hover { color: var(--s-300); }
 
   footer { flex-direction: column; text-align: center; }
 }
+
+/* =============================================
+   CHOREOGRAPHED BACKGROUND CANVAS & UI LAYERING
+   ============================================= */
+.fixed-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: auto; /* Allow dragging of the brick in empty areas */
+}
+
+#ui-layer {
+  position: relative;
+  z-index: 10;
+  pointer-events: none; /* Clicks pass through to background 3D canvas */
+}
+
+.pointer-events-auto {
+  pointer-events: auto !important; /* Clicks register on inputs, cards, and buttons */
+}
+
+/* Transparent backgrounds to see 3D model behind content */
+section {
+  background: transparent !important;
+}
+
+#pedigree {
+  background: rgba(10, 10, 15, 0.4) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.cta-section {
+  background: rgba(10, 10, 15, 0.5) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+

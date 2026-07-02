@@ -1005,20 +1005,19 @@ export default function StressLab({ onClaimAllocation }) {
 
         .sl-body {
           display: grid;
-          grid-template-columns: 2fr 1fr;
+          grid-template-columns: 1fr;
           gap: 0;
           border-top: none;
         }
 
         @media (max-width: 900px) {
           .sl-body { grid-template-columns: 1fr; }
-          .sl-terminal { min-height: 200px !important; }
         }
 
         .sl-canvas-wrap {
           position: relative;
           cursor: crosshair;
-          border-right: 1px solid rgba(255,255,255,0.05);
+          border-right: none;
         }
 
         .sl-overlay {
@@ -1193,8 +1192,7 @@ export default function StressLab({ onClaimAllocation }) {
             The&nbsp;<span style={{ background: 'linear-gradient(135deg,#EDE0C8 0%,#C8A96E 45%,#8A6F3E 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>B R I Q U E</span>&nbsp;Audit
           </div>
           <p className="sl-desc">
-            Fling the appreciating B R I Q U E to smash depreciating smart tech
-            and pop Hype Bubbles before they crash adjacent asset values.
+            Drag the B R I Q U E left to aim and release to launch. Smash smart tech targets to rescue depreciating value into your portfolio.
           </p>
         </div>
 
@@ -1300,37 +1298,8 @@ export default function StressLab({ onClaimAllocation }) {
             </div>
           )}
         </div>
-
-        {/* Terminal */}
-        <div className="sl-terminal">
-          <div>
-            <div className="sl-terminal-header">
-              <span className="sl-live-dot" />
-              Audit Telemetry Feed
-            </div>
-            <div className="sl-log-feed">
-              {logLines.map((line, idx) => {
-                let color = 'rgba(200,169,110,0.5)';
-                if (line.includes('[CRITICAL]')) color = 'rgba(231,76,60,0.8)';
-                if (line.includes('[SYSTEM]'))   color = 'rgba(241,196,15,0.65)';
-                if (line.includes('[SAVED]') || line.includes('[VICTORY]')) color = 'rgba(46,204,113,0.8)';
-                if (line.includes('[LAUNCH]'))   color = 'rgba(241,196,15,0.65)';
-                if (line.includes('[CONSOLE]'))  color = 'rgba(200,169,110,0.35)';
-                if (line.includes('[IMPACT]'))   color = 'rgba(200,169,110,0.55)';
-                return (
-                  <div key={idx} className="sl-log-line" style={{ color }}>
-                    {line}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="sl-terminal-footer">
-            <HelpCircleIcon size={10} style={{ flexShrink: 0, marginTop: '1px' }} />
-            Drag the Brique left to aim & release to launch. Smash tech to rescue depreciating asset value.
-          </div>
-        </div>
       </div>
+
     </div>
   );
 }
